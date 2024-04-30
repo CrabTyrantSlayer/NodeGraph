@@ -1,11 +1,7 @@
-﻿using Livet;
-using Livet.EventListeners;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -152,7 +148,7 @@ namespace NodeGraph.Controls
             var nodeLinks = _NodeLinks.ToArray();
 
             // it must instance to nodeLinks because change node link collection in NodeLink Dispose.
-            foreach(var nodeLink in nodeLinks)
+            foreach (var nodeLink in nodeLinks)
             {
                 nodeLink.Dispose();
             }
@@ -234,7 +230,7 @@ namespace NodeGraph.Controls
 
         public void Initialize()
         {
-            foreach(var connector in _Canvas.Children.OfType<NodeConnectorContent>())
+            foreach (var connector in _Canvas.Children.OfType<NodeConnectorContent>())
             {
                 // ItemContainerStyle is still null during applying template, so need to apply at initialize.(ApplyTemplate later)
                 connector.Style = ItemContainerStyle;
@@ -254,7 +250,7 @@ namespace NodeGraph.Controls
 
             var connectors = _Canvas.Children.OfType<NodeConnectorContent>().ToArray();
 
-            foreach(var connector in connectors)
+            foreach (var connector in connectors)
             {
                 connector.Dispose();
             }
@@ -274,7 +270,7 @@ namespace NodeGraph.Controls
 
         public void UpdateLinkPosition(Canvas canvas)
         {
-            if(_Canvas == null)
+            if (_Canvas == null)
             {
                 return;
             }
@@ -287,7 +283,7 @@ namespace NodeGraph.Controls
 
         public void UpdateConnectorsLayout()
         {
-            if(_Canvas == null)
+            if (_Canvas == null)
             {
                 return;
             }
@@ -338,7 +334,7 @@ namespace NodeGraph.Controls
                 removeElements.Add(removeElement);
             }
 
-            foreach(var element in removeElements)
+            foreach (var element in removeElements)
             {
                 element.SizeChanged -= Connector_SizeChanged;
                 element.Dispose();

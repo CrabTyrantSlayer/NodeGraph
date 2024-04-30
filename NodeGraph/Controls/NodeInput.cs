@@ -1,16 +1,6 @@
-﻿using Livet;
-using Livet.EventListeners;
-using NodeGraph.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NodeGraph.Utilities;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 
 namespace NodeGraph.Controls
 {
@@ -58,21 +48,21 @@ namespace NodeGraph.Controls
 
         public override bool CanConnectTo(NodeConnectorContent connector)
         {
-            if(AllowToOverrideConnection == false && (ConnectedCount > 0 && AllowToConnectMultiple == false))
+            if (AllowToOverrideConnection == false && (ConnectedCount > 0 && AllowToConnectMultiple == false))
             {
                 // already connected to other node link.
                 return false;
             }
-            if((CanConnect && connector is NodeOutputContent && Node != connector.Node) == false)
+            if ((CanConnect && connector is NodeOutputContent && Node != connector.Node) == false)
             {
                 return false;
             }
 
             // check for circulation connecting.
             var nodeLinks = connector.Node.EnumrateConnectedNodeLinks();
-            foreach(var nodeLink in nodeLinks)
+            foreach (var nodeLink in nodeLinks)
             {
-                if(nodeLink.Output?.Node == Node)
+                if (nodeLink.Output?.Node == Node)
                 {
                     return false;
                 }
@@ -83,19 +73,19 @@ namespace NodeGraph.Controls
     }
 
     public class NodeInput : NodeConnector<NodeInputContent>
-	{
-		protected override string ConnectorCanvasName => "__NodeInputCanvas__";
+    {
+        protected override string ConnectorCanvasName => "__NodeInputCanvas__";
 
         protected override ControlTemplate NodeConnectorContentTemplate => _NodeInputTemplate.Get("__NodeInputContentTemplate__");
-		ResourceInstance<ControlTemplate> _NodeInputTemplate = new ResourceInstance<ControlTemplate>();
+        ResourceInstance<ControlTemplate> _NodeInputTemplate = new ResourceInstance<ControlTemplate>();
 
         protected override Style NodeConnectorContentBaseStyle => _NodeConnectorContentBaseStyle.Get("__NodeInputBaseStyle__");
         ResourceInstance<Style> _NodeConnectorContentBaseStyle = new ResourceInstance<Style>();
 
 
         static NodeInput()
-		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(NodeInput), new FrameworkPropertyMetadata(typeof(NodeInput)));
-		}
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NodeInput), new FrameworkPropertyMetadata(typeof(NodeInput)));
+        }
     }
 }
